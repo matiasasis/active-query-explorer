@@ -29,12 +29,9 @@ module ActiveQueryExplorer
     end
 
     def coerce_value(value, type)
-      case type&.name
-      when "Integer" then Integer(value)
-      when "Float" then Float(value)
-      when "ActiveQuery::Base::Boolean" then ActiveModel::Type::Boolean.new.cast(value)
-      else value.to_s
-      end
+      return value.to_s unless type && ActiveQuery::TypeRegistry.coercer?(type)
+
+      ActiveQuery::TypeRegistry.coerce(type, value)
     end
   end
 end

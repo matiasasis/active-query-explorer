@@ -388,9 +388,13 @@ function executeQuery(className, queryName, cardId) {
 
   var startTime = performance.now();
 
+  var csrfToken = document.querySelector('meta[name="csrf-token"]');
+  var headers = { "Content-Type": "application/json" };
+  if (csrfToken) headers["X-CSRF-Token"] = csrfToken.getAttribute("content");
+
   fetch(executeUrl, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: headers,
     body: JSON.stringify({
       query_class: className,
       query_name: queryName,

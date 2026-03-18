@@ -17,7 +17,10 @@ module ActiveQueryExplorer
     def coerce_args(args_hash, args_def)
       return {} if args_hash.blank?
 
-      args_hash.to_unsafe_h.symbolize_keys.each_with_object({}) do |(key, value), result|
+      permitted_keys = args_def.keys.map(&:to_s)
+      safe_args = args_hash.permit(*permitted_keys).to_h.symbolize_keys
+
+      safe_args.each_with_object({}) do |(key, value), result|
         next if value.blank? && (args_def.dig(key, :optional) == true)
 
         type = args_def.dig(key, :type)

@@ -3,7 +3,6 @@
 module ActiveQueryExplorer
   class QueriesController < ActionController::Base
     layout false
-    skip_forgery_protection only: [:execute]
 
     def index
       respond_to do |format|

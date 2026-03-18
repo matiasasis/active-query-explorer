@@ -2,8 +2,13 @@
 
 module ActiveQueryExplorer
   class QueriesController < ActionController::Base
+    layout false
+
     def index
-      render json: grouped_queries
+      respond_to do |format|
+        format.html
+        format.json { render json: grouped_queries }
+      end
     end
 
     private

@@ -626,7 +626,7 @@
           applyFilters();
         })
         .catch(function(err) {
-          main.innerHTML = '<div class="empty-state"><h2>Error loading queries</h2><p>' + err.message + '</p></div>';
+          main.innerHTML = '<div class="empty-state"><h2>Error loading queries</h2><p>' + escapeHtml(err.message) + '</p></div>';
         });
     }
 

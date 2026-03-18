@@ -4,6 +4,15 @@ module ActiveQueryExplorer
   class Engine < ::Rails::Engine
     isolate_namespace ActiveQueryExplorer
 
+    initializer "active_query_explorer.assets" do |app|
+      app.config.assets.paths << root.join("app", "assets", "stylesheets")
+      app.config.assets.paths << root.join("app", "assets", "javascripts")
+      app.config.assets.precompile += %w[
+        active_query_explorer/application.css
+        active_query_explorer/application.js
+      ]
+    end
+
     initializer "active_query_explorer.eager_load_queries" do
       ActiveSupport.on_load(:after_initialize) do
         query_dirs = %w[queries query_objects]

@@ -272,5 +272,15 @@ RSpec.describe ActiveQueryExplorer::QueriesController do
       expect(ctrl.send(:executor)).to equal(ctrl.send(:executor))
       expect(ctrl.send(:serializer)).to equal(ctrl.send(:serializer))
     end
+
+    it "memoizes text_formatter instance" do
+      ctrl = described_class.new
+      expect(ctrl.send(:text_formatter)).to equal(ctrl.send(:text_formatter))
+    end
+
+    it "returns a QueryTextFormatter instance" do
+      ctrl = described_class.new
+      expect(ctrl.send(:text_formatter)).to be_a(ActiveQueryExplorer::QueryTextFormatter)
+    end
   end
 end

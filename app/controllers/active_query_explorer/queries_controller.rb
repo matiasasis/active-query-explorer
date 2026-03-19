@@ -10,6 +10,7 @@ module ActiveQueryExplorer
       respond_to do |format|
         format.html
         format.json { render json: discovery.grouped_queries }
+        format.text { render plain: text_formatter.format(discovery.grouped_queries) }
       end
     end
 
@@ -44,6 +45,10 @@ module ActiveQueryExplorer
 
     def serializer
       @serializer ||= ActiveQueryExplorer.serializer_class.new
+    end
+
+    def text_formatter
+      @text_formatter ||= ActiveQueryExplorer::QueryTextFormatter.new
     end
   end
 end

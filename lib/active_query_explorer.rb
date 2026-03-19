@@ -5,6 +5,7 @@ require_relative "active_query_explorer/version"
 require_relative "active_query_explorer/query_discovery"
 require_relative "active_query_explorer/query_executor"
 require_relative "active_query_explorer/result_serializer"
+require_relative "active_query_explorer/query_text_formatter"
 require_relative "active_query_explorer/engine" if defined?(Rails::Engine)
 
 module ActiveQueryExplorer
